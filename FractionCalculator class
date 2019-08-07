@@ -4,27 +4,28 @@ public class FractionCalculator {
     public static void main(String[] args){
         System.out.println("Welcome to the fraction calculator program.\nIt will add, subtract, multiply and divide until you typeQ to quit.");
         Scanner input = new Scanner(System.in);
-        getOperation(input);
+        String ops=getOperation(input);
         Fraction f,f1,f2 = new Fraction();
         f=getFraction(input);
         f1=getFraction(input);
-        if(input.equals("+")){
-            f2=f.add(f1);
-            System.out.println(f2.toString());
+        switch(ops){
+            case "+":
+                f2=f.add(f1);
+                break;
+            case "-":
+                f2=f.subtract(f1);
+                break;
+            case "/":
+                f2=f.divide(f1);
+                break;
+            case "*":
+                f2=f.multiply(f1);
+                break;
+            case "=":
+                boolean res=f.equals(f1);
+                System.out.println(res);
         }
-        else if(input.equals("-")){
-            f2=f.subtract(f1);
-        }
-        else if(input.equals("/")){
-            f2=f.divide(f1);
-        }
-        else if(input.equals("*")){
-            f2=f.multiply(f1);
-        }
-        else {
-            System.exit(0);
-        }
-
+        System.out.println(f2.toString());
     }
     public static String getOperation(Scanner input){
         System.out.println("Enter valid mathematical operation. (+,-,/,*,= or Q to quit)");
@@ -58,7 +59,7 @@ public class FractionCalculator {
                 }
             }
             return true;
-            }
+        }
         else{
             if(!((int)x.charAt(0)==45||((int)x.charAt(0)<=57&&(int)x.charAt(0)>=48))){
                 return false;
@@ -72,10 +73,11 @@ public class FractionCalculator {
             }
             return true;
         }
-        }
+    }
+
         public static Fraction getFraction(Scanner input){
             System.out.println("Enter valid fraction. Enter a/b or a, where a and b are integers and b is not zero:");
-            String in = input.next();
+            String in = input.nextLine();
             if(validFraction(in)){
                 int x = in.indexOf("/");
                 if(x>0){
@@ -98,4 +100,4 @@ public class FractionCalculator {
             }
             return null;
         }
-    }
+}
