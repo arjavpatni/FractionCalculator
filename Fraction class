@@ -1,0 +1,84 @@
+public class Fraction {
+    private int numerator;
+    private int denominator;
+    public Fraction(){
+        this.numerator=0;
+        this.denominator=1;
+    }
+    public Fraction(int num){
+        this.numerator=num;
+        this.denominator=1;
+    }
+    public Fraction(int num,int den) {
+        if (den == 0) {
+            throw new IllegalArgumentException("Denominator should not be zero.");
+        }
+        if (den < 0) {
+            num = num * (-1);
+            den = den * (-1);
+        }
+        this.numerator = num;
+        this.denominator = den;
+    }
+    public int getNumerator(){
+        return numerator;
+    }
+    public int getDenominator(){
+        return denominator;
+    }
+    public String toString(){
+        return numerator+"/"+denominator;
+    }
+    public double toDouble(){
+        return numerator/denominator;
+    }
+    public Fraction add(Fraction other){
+        Fraction f1=new Fraction(0,1);
+        f1.numerator=(this.numerator*other.denominator)+(other.numerator*this.denominator);
+        f1.denominator=(this.denominator*other.denominator);
+        return f1;
+    }
+    public Fraction subtract(Fraction other){
+        Fraction f1=new Fraction(0,1);
+        f1.numerator=(this.numerator*other.denominator)-(other.numerator*this.denominator);
+        f1.denominator=(this.denominator*other.denominator);
+        f1.toLowestTerms();
+        return f1;
+    }
+    public Fraction multiply(Fraction other){
+        Fraction f1=new Fraction();
+        f1.numerator=(this.numerator*other.numerator);
+        f1.denominator=(this.denominator*other.denominator);
+        f1.toLowestTerms();
+        return f1;
+    }
+    public Fraction divide(Fraction other){
+        Fraction f1=new Fraction();
+        f1.numerator=(this.numerator*other.denominator);
+        f1.denominator=(this.denominator*other.numerator);
+        f1.toLowestTerms();
+        return f1;
+    }
+    public void toLowestTerms(){
+        int a = this.numerator;
+        int b = this.denominator;
+        int rem;
+        while (a>0&&b>0) {
+            rem=a%b;
+            a=b;
+            b=rem;
+        }
+        this.numerator=this.numerator/a;
+        this.denominator=this.denominator/a;
+    }
+    public static int gcd(int a,int b){
+        int rem;
+        while (a>0&&b>0) {
+            rem=a%b;
+            a=b;
+            b=rem;
+        }
+        return a;
+    }
+
+    }
